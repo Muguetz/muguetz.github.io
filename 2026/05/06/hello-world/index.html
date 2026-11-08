@@ -1,770 +1,267 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="keywords" content="Hexo Theme Redefine">
-    
-    
-    <meta name="author" content="zhaooozhe">
-    
-    <!-- Completely eliminate flash of wrong theme -->
-    <script>
-        (function() {
-            const THEME_KEY = "REDEFINE-THEME-STATUS";
-            const DARK = "dark", LIGHT = "light";
-            
-            // Get preferred theme
-            function getTheme() {
-                try {
-                    const saved = localStorage.getItem(THEME_KEY);
-                    if (saved) {
-                        const { isDark } = JSON.parse(saved);
-                        return isDark ? DARK : LIGHT;
-                    }
-                } catch (e) {}
-                
-                return matchMedia("(prefers-color-scheme: dark)").matches ? DARK : LIGHT;
-            }
-            
-            // Apply theme to document
-            function applyTheme(theme) {
-                const isDark = theme === DARK;
-                const root = document.documentElement;
-                
-                // Set classes for compatibility
-                root.classList.add(theme);
-                root.classList.remove(isDark ? LIGHT : DARK);
-                root.style.colorScheme = theme;
-            }
-            
-            // Initial application
-            const theme = getTheme();
-            applyTheme(theme);
-            
-            // Listen for system preference changes
-            matchMedia("(prefers-color-scheme: dark)").addEventListener("change", ({ matches }) => {
-                // Only update if using system preference (no localStorage entry)
-                if (!localStorage.getItem(THEME_KEY)) {
-                    applyTheme(matches ? DARK : LIGHT);
-                }
-            });
-            
-            // Set body classes ASAP (before DOMContentLoaded)
-            (function() {
-                const addBodyClass = () => {
-                    const b = document.body;
-                    if (!b) return false;
-                    b.classList.add(theme + "-mode");
-                    return true;
-                };
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.1">
 
-                // Try immediately
-                if (addBodyClass()) return;
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-                // Observe until body exists
-                const mo = new MutationObserver(() => {
-                    if (addBodyClass()) mo.disconnect();
-                });
-                mo.observe(document.documentElement, { childList: true, subtree: true });
-            })();
-        })();
-    </script>
-    
-    <!-- preconnect -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="/css/main.css">
 
-    
-    <!--- Seo Part-->
-    
-    <link rel="canonical" href="http://example.com/2026/05/06/hello-world/"/>
-    <meta name="robots" content="index,follow">
-    <meta name="googlebot" content="index,follow">
-    <meta name="revisit-after" content="1 days">
-    
-    
-        
-        <meta name="description" content="Hexo Theme Redefine, Redefine Your Hexo Journey.">
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css" integrity="sha256-4Lad8m4ZWW1Lgb9+sMVLYEfnIh7BjV1NQMEe79Pviks=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.29.1","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="世界，你好。 我是这里的主人，我刚刚搬进来。 请多关照。 1&gt; Hello, World!">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hello World">
 <meta property="og:url" content="http://example.com/2026/05/06/hello-world/index.html">
 <meta property="og:site_name" content="HaozheZhao&#39;s blogs">
-<meta property="og:description" content="Hexo Theme Redefine, Redefine Your Hexo Journey.">
+<meta property="og:description" content="世界，你好。 我是这里的主人，我刚刚搬进来。 请多关照。 1&gt; Hello, World!">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/images/redefine-og.webp">
 <meta property="article:published_time" content="2026-05-06T11:49:34.226Z">
-<meta property="article:modified_time" content="2026-05-18T06:28:10.689Z">
+<meta property="article:modified_time" content="2026-11-08T06:55:09.912Z">
 <meta property="article:author" content="muguetz">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/images/redefine-og.webp">
-    
-    
-    <!--- Icon Part-->
-    <link rel="icon" type="image/png" href="/images/redefine-favicon.svg" sizes="192x192">
-    <link rel="apple-touch-icon" sizes="180x180" href="/images/redefine-favicon.svg">
-    <meta name="theme-color" content="#A31F34">
-    <link rel="shortcut icon" href="/images/redefine-favicon.svg">
-    <!--- Page Info-->
-    
-    <title>
-        
-            Hello World | HaozheZhao&#39;s blogs
-        
-    </title>
-
-    
-<link rel="stylesheet" href="/fonts/Chillax/chillax.css">
 
 
-    <!--- Inject Part-->
-    
-
-    
-<link rel="stylesheet" href="/css/style.css">
+<link rel="canonical" href="http://example.com/2026/05/06/hello-world/">
 
 
-    
-        
-<link rel="stylesheet" href="/css/build/tailwind.css">
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2026/05/06/hello-world/","path":"2026/05/06/hello-world/","title":"Hello World"}</script>
 
-    
-
-    
-<link rel="stylesheet" href="/fonts/GeistMono/geist-mono.css">
-
-    
-<link rel="stylesheet" href="/fonts/Geist/geist.css">
-
-    <!--- Font Part-->
-    
-    
-    
-    
-    
-    
-
-    <script id="hexo-configurations">
-    window.config = {"hostname":"example.com","root":"/","language":"zh-CN"};
-    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true,"delete_mask":false,"title_alignment":"left","headings_top_spacing":{"h1":"3.2rem","h2":"2.4rem","h3":"1.9rem","h4":"1.6rem","h5":"1.4rem","h6":"1.3rem"}},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":true,"auto":false,"list":[]},"code_block":{"copy":true,"style":"mac","highlight_theme":{"light":"github","dark":"vs2015"},"font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":{"enable":true,"default":"cc_by_nc_sa"},"lazyload":true,"pangu_js":false,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null,"default_mode":"light"},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null},"title":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":false,"percentage":true},"website_counter":{"url":"https://cn.vercount.one/js","enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"preloader":{"enable":false,"custom_message":null},"side_tools":{"gear_rotation":true,"auto_expand":false},"open_graph":{"enable":true,"image":"/images/redefine-og.webp","description":"Hexo Theme Redefine, Redefine Your Hexo Journey."},"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"/images/wallhaven-wqery6-light.webp","dark":"/images/wallhaven-wqery6-dark.webp"},"title":"HaozheZhao's blogs","subtitle":{"text":[],"hitokoto":{"enable":false,"show_author":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":false,"style":"default","links":[{"icon":"fa-brands fa-github","url":null},{"icon":"fa-brands fa-twitter","url":null},{"icon":"fa-solid fa-at","url":"you@example.com"},{"icon":"fa-brands fa-telegram","url":null},{"icon":"/images/custom-icon.svg","url":null}],"qrs":[{"icon":"fa-brands fa-weixin","qr":null},{"icon":"/images/custom-icon.svg","qr":null}]}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null,"lrc":null}]},"mermaid":{"enable":false,"version":"11.4.1","theme":{"light":"default","dark":"dark"}}},"version":"2.9.0","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"width":{"home":"1200px","pages":"1000px"},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"}},"search":{"enable":false,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"blur","masonry":{"batch_size":12,"initial_batch_size":24}},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":null,"show_on_mobile":true,"links":null},"article_date_format":"auto","excerpt_length":200,"categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footer":{"runtime":true,"icon":"<i class=\"fa-solid fa-heart fa-beat\" style=\"--fa-animation-duration: 0.5s; color: #f54545\"></i>","start":"2022/8/17 11:45:14","statistics":true,"customize":null,"icp":{"enable":false,"number":null,"url":null}},"footerStart":"2022/8/17 11:45:14","mermaid":{"style":{"light":"default","dark":"dark"}}};
-    window.lang_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
-    window.i18n = {"search":"站内搜索您需要的内容...","toc":"目录","prev":"上一页","next":"下一页","prev_posts":"上一篇","next_posts":"下一篇","page":"第 %d 页","recent_posts":"最新文章","share":"分享","powered_by":"由 %s 驱动","theme":"主题","rss_feed":"RSS Feed","category":"分类","categories":"分类","tag":"标签","tags":"标签","post":"文章","posts":"文章","tagcloud":"标签云","comment":"评论","comments":"评论","top":"置顶","sticky":"置顶","go-back-home":"回到首页","masonry_loading":"照片加载中...","image_viewer":"图片查看器","close":"关闭","exif":{"title":"EXIF","cards":{"camera":"相机","lens":"镜头","exposure":"曝光","other":"其他"},"fields":{"make":"品牌","model":"机型","date_taken":"拍摄时间","lens_model":"镜头","focal_length":"焦距","focus_mode":"对焦模式","shutter":"快门","aperture":"光圈","iso":"感光度","exposure_program":"曝光程序","exposure_compensation":"曝光补偿","metering_mode":"测光模式","flash":"闪光灯","white_balance":"白平衡","latitude":"纬度","longitude":"经度","altitude":"海拔"},"status":{"loading":"加载中...","no_exif":"无 EXIF 信息","library_missing":"EXIF 库未加载","image_source_missing":"图片地址不可用","unavailable":"EXIF 不可用（可能被 CORS 阻止或缺少元数据）","flag_unavailable":"EXIF 不可用"}},"home":"首页","archive":"归档","archives":"归档","about":"关于","links":"链接","link":"链接","friends":"友情链接","friend":"友情链接","timeline":"时间轴","shuoshuo":"说说","bookmarks":"书签","site_uv":"访问人数","site_pv":"总访问量","read_more":"阅读全文","wordcount":"字","min2read":"分钟","changelog":"更新日志","status":"状态","runtime":"博客已运行","days":"天","hours":"小时","minutes":"分钟","seconds":"秒","optimized_by":"并由 Evan 进行优化","rights":"版权所有","site_posts":"共撰写了 %s 篇文章","site_wordcount":"共 %s 字","copyright":{"title":"标题","author":"作者","link":"链接","create_time":"创建于","update_time":"更新于","license_title":"版权声明","license_content":"本文章采用 %s 进行许可。","all_rights_reserved":"版权所有 &#169 %s，禁止转载。","public_domain":"本文为公有领域作品，可自由转载、引用。"},"ago":{"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"},"create_time":"创建","update_time":"更新","expired":"这篇文章最后更新于 %s 天前，内容可能已经过时。"};
-    window.data = {"masonry":false};
-  </script>
-    
-    <!--- Fontawesome Part-->
-    
-<link rel="stylesheet" href="/fontawesome/fontawesome.min.css">
-
-    
-<link rel="stylesheet" href="/fontawesome/brands.min.css">
-
-    
-<link rel="stylesheet" href="/fontawesome/solid.min.css">
-
-    
-<link rel="stylesheet" href="/fontawesome/regular.min.css">
-
-    
-    
-    
-    
-<meta name="generator" content="Hexo 8.1.1"></head>
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Hello World | HaozheZhao's blogs</title>
+  
 
 
-<body>
-	<div class="progress-bar-container">
-	
 
-	
-	<span class="pjax-progress-bar"></span>
-	<!--        <span class="swup-progress-icon">-->
-	<!--            <i class="fa-solid fa-circle-notch fa-spin"></i>-->
-	<!--        </span>-->
-	
+
+
+
+
+
+  
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-search popup-trigger" aria-label="搜索" role="button">
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">HaozheZhao's blogs</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-toggle" aria-label="切换导航栏" role="button">
+  </div>
 </div>
 
-<main class="page-container" id="swup">
 
-	
 
-	<div class="main-content-container flex flex-col justify-between min-h-dvh">
-		<div class="main-content-header">
-			<header class="navbar-container px-6 md:px-12">
-    <div class="navbar-content transition-navbar ">
-        <div class="left">
-            
-            <a class="logo-title" href="/">
-                
-                HaozheZhao&#39;s blogs
-                
-            </a>
-        </div>
 
-        <div class="right">
-            <!-- PC -->
-            <div class="desktop">
-                <ul class="navbar-list">
-                    
-                        
-                            
 
-                            <li class="navbar-item">
-                                <!-- Menu -->
-                                <a class=""
-                                   href="/"
-                                        >
-                                    <i class="fa-regular fa-house fa-fw"></i>
-                                    首页
-                                    
-                                </a>
 
-                                <!-- Submenu -->
-                                
-                            </li>
-                    
-                    
-                </ul>
-            </div>
-            <!-- Mobile -->
-            <div class="mobile">
-                
-                <div class="icon-item navbar-bar">
-                    <div class="navbar-bar-middle"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Mobile sheet -->
-    <div class="navbar-drawer h-dvh w-full absolute top-0 left-0 bg-background-color flex flex-col justify-between">
-        <ul class="drawer-navbar-list flex flex-col px-4 justify-center items-start">
-            
-                
-                    
-
-                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
-                        
-                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
-                           href="/"
-                        >
-                            <span>
-                                首页
-                            </span>
-                            
-                                <i class="fa-regular fa-house fa-sm fa-fw"></i>
-                            
-                        </a>
-                        
-
-                        
-                    </li>
-            
-
-            
-            
-        </ul>
-
-        <div class="statistics flex justify-around my-2.5">
-    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/tags">
-        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">0</div>
-        <div class="label text-third-text-color text-sm">标签</div>
-    </a>
-    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/categories">
-        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">0</div>
-        <div class="label text-third-text-color text-sm">分类</div>
-    </a>
-    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
-        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">1</div>
-        <div class="label text-third-text-color text-sm">文章</div>
-    </a>
-</div>
-    </div>
-
-    <div class="window-mask"></div>
 
 </header>
+        
+  
+  <aside class="sidebar">
 
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
 
-		</div>
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
 
-		<div class="main-content-body transition-fade-up">
-			
-
-			<div class="main-content">
-				<div class="post-page-container flex relative justify-between box-border w-full h-full">
-	<div class="article-content-container">
-
-		<div class="article-title relative w-full">
-			
-			<div class="w-full flex items-center pt-6 justify-start">
-				<h1 class="article-title-regular text-second-text-color tracking-tight text-4xl md:text-6xl font-semibold px-2 sm:px-6 md:px-8 py-3">Hello World</h1>
-			</div>
-			
-		</div>
-
-		
-		<div class="article-header flex flex-row gap-2 items-center px-2 sm:px-6 md:px-8">
-			<div class="avatar w-[46px] h-[46px] shrink-0 rounded-medium border border-border-color p-px">
-				<img src="/images/redefine-avatar.svg">
-			</div>
-			<div class="info flex flex-col justify-between">
-				<div class="author flex items-center">
-					<span class="name text-default-text-color text-lg font-semibold">zhaooozhe</span>
-					
-					<span class="author-label ml-1.5 text-xs px-2 py-0.5 rounded-small text-third-text-color border border-shadow-color-1">Lv1</span>
-					
-				</div>
-				<div class="meta-info">
-					<div class="article-meta-info">
-    <span class="article-date article-meta-item">
-        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
-        <span class="desktop">2026-05-06 19:49:34</span>
-        <span class="mobile">2026-05-06 19:49:34</span>
-        <span class="hover-info">创建</span>
-    </span>
-    
-        <span class="article-date article-meta-item">
-            <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2026-05-18 14:28:10</span>
-            <span class="mobile">2026-05-18 14:28:10</span>
-            <span class="hover-info">更新</span>
-        </span>
-    
-
-    
-    
-
-    
-    
-    
-    
-        <span class="article-pv article-meta-item">
-            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
-        </span>
-    
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">muguetz</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">1</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
 </div>
 
-				</div>
-			</div>
-		</div>
-		
+        </div>
+      </div>
+    </div>
 
-		
+    
+  </aside>
 
 
-		<div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
-			<blockquote>
-<p>每一个程序员的第一行代码，都是一声对世界的问候。</p>
-</blockquote>
-<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(&quot;Hello, World!&quot;)</span><br></pre></td></tr></table></figure></div>
+    </div>
 
-<p>屏幕上跳出这行字的瞬间，我愣了一下。</p>
-<p>就这样？就这样！</p>
-<p>那时候我还不明白，这简单得近乎敷衍的两个单词，究竟承载着什么。后来我渐渐懂了——它不是在向世界介绍程序，它是在向程序介绍世界。那是一次郑重的握手，一次怯生生却又无比真诚的自我介绍：<strong>嘿，我来了，我在这里。</strong></p>
-<h2 id="初见"><a href="#初见" class="headerlink" title="初见"></a>初见</h2><p>我记得第一次坐在电脑前的感觉。那台机器对我来说是一个庞大的谜，风扇嗡嗡地转，屏幕泛着蓝光，键盘上密密麻麻的字母让我无从下手。我小心翼翼地移动鼠标，生怕点错什么，弄坏什么。</p>
-<p>后来敲下第一行代码也是同样的心情。对着教程一个字符一个字符地照抄，屏蔽不住内心的紧张：缩进对了吗？引号用对了吗？会不会报错？</p>
-<p><code>Hello, World!</code> 出现的那一刻，有种说不清道不明的成就感——不是因为做了什么了不起的事，而是因为<strong>我开口了，世界回应了我</strong>。</p>
-<p>人生中所有真正重要的事情，大概都是这样开始的。</p>
-<p>蹒跚学步的婴儿，第一次松开大人的手；第一次骑车，膝盖蹭破了皮却咧嘴在笑；第一次写日记，歪歪扭扭的字，幼稚的心事。</p>
-<p>笨拙，是所有开始共同的底色。但笨拙不可耻，笨拙意味着你在真实地经历一件事，你在生长。</p>
-<h2 id="Hello-World"><a href="#Hello-World" class="headerlink" title="Hello World"></a>Hello World</h2><p>今天，我用 GitHub 和 Hexo 搭起了这个小小的地方。</p>
-<p>过程说来简单，却也折腾了不少时间：配置环境、踩了几个坑、看文档、反复调试……当页面终于在浏览器里正常显示的那一刻，我盯着它看了好几秒。</p>
-<p>有点不真实。</p>
-<p>这是<strong>我的</strong>。不是别人的模板，不是某个平台分配给我的一块格子——是我亲手搭起来的地方，有我选的主题，有我的域名，有我决定放什么、不放什么的权利。</p>
-<p>它现在还是空的。只有这一篇文章，像是刚刚出生的孩子，对这个世界还没有任何记忆。</p>
-<p>但这正是我喜欢这个时刻的原因。</p>
-<p><strong>空白不是贫乏，空白是可能性。</strong></p>
-<h2 id="写作-编程"><a href="#写作-编程" class="headerlink" title="写作 &amp;&amp; 编程"></a>写作 &amp;&amp; 编程</h2><p>代码是写给机器看的语言，文字是写给人看的语言。但本质上，它们做的是同一件事——<strong>把脑子里混沌的想法，变成有结构、有意义的东西</strong>。</p>
-<p>我有很多想写的：技术上踩过的坑和爬出来的方法，读过的书和看过的电影，某个深夜突然想清楚的一件事，某段旅途里让我忽然安静下来的风景。</p>
-<p>不确定会写得好不好，不确定有没有人会看，但我想试试。</p>
-<p>就像当年敲下那行 <code>Hello, World!</code> ，不知道前方等着我的是什么，但还是按下了回车。</p>
-<h2 id="致未来的自己"><a href="#致未来的自己" class="headerlink" title="致未来的自己"></a>致未来的自己</h2><p>也许一年后，或者更久之后，你会回来翻到这篇文章。</p>
-<p>希望那时候的你，还记得今天这种感觉——对一件新事物又期待又忐忑，不知道能走多远，但还是决定开始。</p>
-<p>希望这里已经积累了很多文章，记录下了你走过的路、想过的事、变化着的自己。</p>
-<p>也希望你还保持着这股劲儿：<strong>遇到不会的就去学，想做的事就去做，想说的话就大声说出来。</strong></p>
-<hr>
-<p>世界，你好。</p>
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/05/06/hello-world/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="muguetz">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HaozheZhao's blogs">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Hello World | HaozheZhao's blogs">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Hello World
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-05-06 19:49:34" itemprop="dateCreated datePublished" datetime="2026-05-06T19:49:34+08:00">2026-05-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-11-08 14:55:09" itemprop="dateModified" datetime="2026-11-08T14:55:09+08:00">2026-11-08</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>世界，你好。</p>
 <p>我是这里的主人，我刚刚搬进来。</p>
 <p>请多关照。</p>
-<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; Hello, World!</span><br></pre></td></tr></table></figure></div>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; Hello, World!</span><br></pre></td></tr></table></figure>
 
-		</div>
-
-		
-		<div class="post-copyright-info w-full my-8 px-2 sm:px-6 md:px-8">
-			<div class="article-copyright-info-container">
-    <ul>
-        <li><strong>标题:</strong> Hello World</li>
-        <li><strong>作者:</strong> zhaooozhe</li>
-        <li><strong>创建于
-                :</strong> 2026-05-06 19:49:34</li>
-        
-            <li>
-                <strong>更新于
-                    :</strong> 2026-05-18 14:28:10
-            </li>
-        
-        <li>
-            <strong>链接:</strong> https://redefine.ohevan.com/2026/05/06/hello-world/
-        </li>
-        <li>
-            <strong>
-                版权声明:
-            </strong>
-            
-
-            
-                本文章采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0">CC BY-NC-SA 4.0</a> 进行许可。
-            
-        </li>
-    </ul>
-</div>
-
-		</div>
-		
-
-		
-
-		
-
-		
-
-
-		
-		<div class="comment-container px-2 sm:px-6 md:px-8 pb-8">
-			<div class="comments-container mt-10 w-full ">
-    <div id="comment-anchor" class="w-full h-2.5"></div>
-    <div class="comment-area-title w-full my-1.5 md:my-2.5 text-xl md:text-3xl font-bold">
-        评论
     </div>
-    
-
-        
-            
-    <div id="waline"></div>
-    <script type="module" data-swup-reload-script>
-      import { init } from '/js/libs/waline.js';
-
-      (function() {
-        const startPath = location.pathname;
-        const startTime = Date.now();
-        const retryDelay = 200;
-        const retryLimit = 5000;
-
-        const runWaline = () => {
-          if (location.pathname !== startPath) {
-            return;
-          }
-
-          const container = document.getElementById('waline');
-          if (!container) {
-            if (Date.now() - startTime < retryLimit) {
-              setTimeout(runWaline, retryDelay);
-            }
-            return;
-          }
-
-          if (window.redefineWalineInstance?.destroy) {
-            window.redefineWalineInstance.destroy();
-          }
-
-          container.innerHTML = '';
-          window.redefineWalineInstance = init({
-            el: '#waline',
-            serverURL: 'https://example.example.com',
-            path: location.pathname,
-            dark: 'body[class~="dark-mode"]',
-            reaction: false,
-            requiredMeta: ['nick', 'mail'],
-            emoji: [],
-                      lang: 'zh-CN',
-          });
-        };
-
-        runWaline();
-      })();
-    </script>
-
-
-
-        
-    
-</div>
-
-		</div>
-		
-	</div>
-
-	
-	<div class="toc-content-container">
-		<div class="post-toc-wrap">
-	<div class="post-toc">
-		<div class="toc-title">目录</div>
-		<div class="page-title">Hello World</div>
-		<ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9D%E8%A7%81"><span class="nav-text">初见</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hello-World"><span class="nav-text">Hello World</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%99%E4%BD%9C-%E7%BC%96%E7%A8%8B"><span class="nav-text">写作 &amp;&amp; 编程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%B4%E6%9C%AA%E6%9D%A5%E7%9A%84%E8%87%AA%E5%B7%B1"><span class="nav-text">致未来的自己</span></a></li></ol>
-
-	</div>
-</div>
-	</div>
-	
-</div>
-
-			</div>
-
-			
-		</div>
-
-		<div class="main-content-footer">
-			<footer class="footer mt-5 py-5 h-auto text-base text-third-text-color relative border-t-2 border-t-border-color">
-    <div class="info-container py-3 text-center">
-        
-        <div class="text-center">
-            &copy;
-            
-              <span>2022</span>
-              -
-            
-            2026&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">zhaooozhe</a>
-            
-                
-                <p class="post-count space-x-0.5">
-                    <span>
-                        共撰写了 1 篇文章
-                    </span>
-                    
-                </p>
-            
-        </div>
-        
-            <script data-swup-reload-script src="https://cn.vercount.one/js"></script>
-            <div class="relative text-center lg:absolute lg:right-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-right">
-                
-                    <span id="busuanzi_container_site_uv" class="lg:!block">
-                        <span class="text-sm">访问人数</span>
-                        <span id="busuanzi_value_site_uv"></span>
-                    </span>
-                
-                
-                    <span id="busuanzi_container_site_pv" class="lg:!block">
-                        <span class="text-sm">总访问量</span>
-                        <span id="busuanzi_value_site_pv"></span>
-                    </span>
-                
-            </div>
-        
-        <div class="relative text-center lg:absolute lg:left-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-left">
-            <span class="lg:block text-sm">由 <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="relative top-[2px] inline-block align-baseline" version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" class="text-base" href="https://hexo.io">Hexo</a> 驱动</span>
-            <span class="text-sm lg:block">主题&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.9.0</a></span>
-        </div>
-        
-        
-            <div>
-                博客已运行 <span class="odometer" id="runtime_days" ></span> 天 <span class="odometer" id="runtime_hours"></span> 小时 <span class="odometer" id="runtime_minutes"></span> 分钟 <span class="odometer" id="runtime_seconds"></span> 秒
-            </div>
-        
-        
-            <script data-swup-reload-script>
-                try {
-                    function odometer_init() {
-                    const elements = document.querySelectorAll('.odometer');
-                    elements.forEach(el => {
-                        new Odometer({
-                            el,
-                            format: '( ddd).dd',
-                            duration: 200
-                        });
-                    });
-                    }
-                    odometer_init();
-                } catch (error) {}
-            </script>
-        
-        
-        
-    </div>  
-</footer>
-		</div>
-	</div>
-
-	
-	<div class="post-tools">
-		<div class="post-tools-container">
-	<ul class="article-tools-list">
-		<!-- TOC aside toggle -->
-		
-		<li class="right-bottom-tools page-aside-toggle">
-			<i class="fa-regular fa-outdent"></i>
-		</li>
-		
-
-		<!-- go comment -->
-		
-		<li class="go-comment">
-			<i class="fa-regular fa-comments"></i>
-		</li>
-		
-	</ul>
-</div>
-	</div>
-	
-
-	<div class="right-side-tools-container">
-		<div class="side-tools-container">
-	<ul class="hidden-tools-list">
-		<li class="right-bottom-tools tool-font-adjust-plus flex justify-center items-center">
-			<i class="fa-regular fa-magnifying-glass-plus"></i>
-		</li>
-
-		<li class="right-bottom-tools tool-font-adjust-minus flex justify-center items-center">
-			<i class="fa-regular fa-magnifying-glass-minus"></i>
-		</li>
-
-		<li class="right-bottom-tools tool-dark-light-toggle flex justify-center items-center">
-			<i class="fa-regular fa-moon"></i>
-		</li>
-
-		<!-- rss -->
-		
-
-		
-
-		<li class="right-bottom-tools tool-scroll-to-bottom flex justify-center items-center">
-			<i class="fa-regular fa-arrow-down"></i>
-		</li>
-	</ul>
-
-	<ul class="visible-tools-list">
-		<li class="right-bottom-tools toggle-tools-list flex justify-center items-center">
-			<i class="fa-regular fa-cog fa-spin"></i>
-		</li>
-		
-		<li class="right-bottom-tools tool-scroll-to-top flex justify-center items-center">
-			<i class="arrow-up fas fa-arrow-up"></i>
-			<span class="percent"></span>
-		</li>
-		
-		
-	</ul>
-</div>
-	</div>
-
-	<div class="image-viewer-container" role="dialog" aria-modal="true" aria-label="图片查看器">
-	<button class="image-viewer-close" type="button" aria-label="关闭">
-		<i class="fa-solid fa-xmark"></i>
-	</button>
-	<button class="image-viewer-prev" type="button" aria-label="上一页">
-		<i class="fa-solid fa-chevron-left"></i>
-	</button>
-	<div class="image-viewer-frame">
-		<img src="" alt="">
-	</div>
-	<div class="image-viewer-exif-panel hidden absolute left-1/2 bottom-20 -translate-x-1/2 w-[min(92vw,420px)] max-h-[60vh] overflow-hidden rounded-2xl bg-background-color-transparent-80 p-4 text-left shadow-redefine-flat backdrop-blur-md" role="dialog" aria-label="EXIF" aria-hidden="true">
-		<div class="flex items-center justify-between mb-3">
-			<span class="text-sm font-semibold text-first-text-color">EXIF</span>
-			<button class="image-viewer-exif-close flex h-8 w-8 items-center justify-center rounded-full bg-background-color-transparent-80 text-first-text-color transition hover:bg-background-color-transparent-40" type="button" aria-label="关闭">
-				<i class="fa-solid fa-xmark text-[0.65rem]"></i>
-			</button>
-		</div>
-		<div class="image-viewer-exif-cards grid grid-cols-1 sm:grid-cols-2 gap-3 max-h-[50vh] overflow-y-auto pr-1 scrollbar-hide"></div>
-		<template class="image-viewer-exif-card-template">
-			<div class="rounded-lg bg-background-color-transparent-40 px-3 py-2">
-				<div class="image-viewer-exif-card-header flex items-center gap-2 mb-1">
-					<i class="image-viewer-exif-card-icon fa-solid fa-circle-info text-xs text-third-text-color"></i>
-					<div class="image-viewer-exif-card-title text-xs font-semibold text-first-text-color"></div>
-				</div>
-				<div class="image-viewer-exif-card-items flex flex-col gap-1"></div>
-			</div>
-		</template>
-	</div>
-	<button class="image-viewer-exif-toggle flex items-center gap-2 hidden absolute left-1/2 bottom-6 -translate-x-1/2 rounded-full border border-border-color bg-background-color-transparent-80 px-4 py-2 text-first-text-color backdrop-blur-md transition hover:bg-background-color-transparent-40" type="button" aria-label="EXIF" aria-expanded="false">
-		<i class="fa-solid fa-circle-info text-xs"></i>
-		<span class="text-xs font-semibold uppercase tracking-wider">EXIF</span>
-	</button>
-	<button class="image-viewer-next" type="button" aria-label="下一页">
-		<i class="fa-solid fa-chevron-right"></i>
-	</button>
-</div>
-
-
-	
-
-</main>
-
-
-
-<script src="/js/build/libs/Swup.min.js"></script>
-
-<script src="/js/build/libs/SwupSlideTheme.min.js"></script>
-
-<script src="/js/build/libs/SwupScriptsPlugin.min.js"></script>
-
-<script src="/js/build/libs/SwupProgressPlugin.min.js"></script>
-
-<script src="/js/build/libs/SwupScrollPlugin.min.js"></script>
-
-<script src="/js/build/libs/SwupPreloadPlugin.min.js"></script>
-
-<script>
-    window.swup = new Swup({
-        plugins: [
-            new SwupScriptsPlugin({
-                optin: true,
-            }),
-            new SwupProgressPlugin(),
-            new SwupScrollPlugin({
-                offset: 80,
-            }),
-            new SwupSlideTheme({
-                mainElement: ".main-content-body",
-            }),
-            new SwupPreloadPlugin(),
-        ],
-        containers: ["#swup"],
-    });
-
-    window.dispatchEvent(
-        new CustomEvent("redefine:swup:ready", {
-            detail: {
-                swup: window.swup,
-            },
-        }),
-    );
-</script>
-
-
-
-
-	
-<script src="/js/build/main.js" type="module"></script>
-
-
 
     
-<script src="/js/build/libs/odometer.min.js"></script>
-
     
-<link rel="stylesheet" href="/assets/odometer-theme-minimal.css">
+    
+
+    <footer class="post-footer">
+
+        
+
+    </footer>
+  </article>
+</div>
 
 
 
 
 
 
+</div>
+  </main>
 
+  <footer class="footer">
+    <div class="footer-inner">
 
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">muguetz</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
 
+    </div>
+  </footer>
 
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
 
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
 
-
-
-
-<script src="/js/build/libs/moment-with-locales.min.js" data-swup-reload-script=""></script>
-
-
-
-	
 </body>
-
 </html>
